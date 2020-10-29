@@ -1,3 +1,5 @@
+import java.util.Objects;
+
 public class Triangle {
     private Dot mA;
     private Dot mB;
@@ -67,5 +69,30 @@ public class Triangle {
 
     public boolean isRectangular() {
         return mIsRectangular;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Triangle triangle = (Triangle) o;
+        return (Float.compare(triangle.mAB, mAB) == 0 &&
+                        Float.compare(triangle.mAC, mAC) == 0 &&
+                        Float.compare(triangle.mBC, mBC) == 0)||
+                (Float.compare(triangle.mAB, mBC) == 0 &&
+                        Float.compare(triangle.mBC, mAC) == 0 &&
+                        Float.compare(triangle.mAC, mAB) == 0)||
+                (Float.compare(triangle.mAB, mAC) == 0 &&
+                        Float.compare(triangle.mBC, mAB) == 0 &&
+                        Float.compare(triangle.mAC, mBC) == 0)||
+
+                (Float.compare(triangle.mAB, mAC) == 0 &&
+                        Float.compare(triangle.mAC, mAB) == 0 &&
+                        Float.compare(triangle.mBC, mBC) == 0);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(mA, mB, mC, mAB, mAC, mBC, mIsIsosceles, mIsRectangular);
     }
 }
