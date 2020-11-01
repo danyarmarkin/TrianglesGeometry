@@ -95,7 +95,7 @@ TD.sort(key=lambda j: j[1])
 out = open("output.txt", "w")
 for j in TD:
     del T1[int(j[0])][6:]
-    out.write(str(T1[int(j[0])]) + "\n")
+    out.write("list_of_vars = "+str(T1[int(j[0])]) + "\n")
 f.close()
 out.close()
 print("done")
