@@ -9,6 +9,7 @@ public class Triangle {
     private float mBC;
     private boolean mIsIsosceles = false;
     private boolean mIsRectangular = false;
+    private float mLongestSize;
 
     Triangle(Dot a, Dot b, Dot c){
         mA = a;
@@ -24,6 +25,13 @@ public class Triangle {
                 Math.sqrt(Math.pow(mAB, 2) + Math.pow(mAC, 2)) == mBC ||
                 Math.sqrt(Math.pow(mAC, 2) + Math.pow(mBC, 2)) == mAB ){
             mIsRectangular = true;
+        }
+        if (mAB > mBC && mAB > mAC){
+            mLongestSize = mAB;
+        } else if (mBC > mAC){
+            mLongestSize = mBC;
+        } else {
+            mLongestSize = mAC;
         }
     }
 
@@ -71,6 +79,10 @@ public class Triangle {
         return mIsRectangular;
     }
 
+    public float getLongestSize() {
+        return mLongestSize;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -85,10 +97,15 @@ public class Triangle {
                 (Float.compare(triangle.mAB, mAC) == 0 &&
                         Float.compare(triangle.mBC, mAB) == 0 &&
                         Float.compare(triangle.mAC, mBC) == 0)||
-
                 (Float.compare(triangle.mAB, mAC) == 0 &&
                         Float.compare(triangle.mAC, mAB) == 0 &&
-                        Float.compare(triangle.mBC, mBC) == 0);
+                        Float.compare(triangle.mBC, mBC) == 0)||
+                (Float.compare(triangle.mAB, mBC) == 0 &&
+                        Float.compare(triangle.mBC, mAB) == 0 &&
+                        Float.compare(triangle.mAC, mAC) == 0)||
+                (Float.compare(triangle.mAB, mAB) == 0 &&
+                        Float.compare(triangle.mBC, mAC) == 0 &&
+                        Float.compare(triangle.mAC, mBC) == 0);
     }
 
     @Override
