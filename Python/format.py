@@ -88,14 +88,19 @@ for j in range(len(T)):
     T1.append(p)
 
 
-    
+TO = []
+for v in T1:
+    p = []
+    for u in T1[T1.index(v)]:
+        p.append("["+str(u)+"]")
+    TO.append(p)
 
 TD = list(TM.items())
 TD.sort(key=lambda j: j[1])
 out = open("output.txt", "w")
 for j in TD:
-    del T1[int(j[0])][6:]
-    out.write("list_of_vars = "+str(T1[int(j[0])]) + "\n")
+    del TO[int(j[0])][6:]
+    out.write("list_of_vars = "+str(TO[int(j[0])]).replace("'", "") + "\n")
 f.close()
 out.close()
 print("done")
