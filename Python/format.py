@@ -84,11 +84,11 @@ for j in range(len(T)):
             p[k]-=u-99
             p[(k+2)%6]-=u-99
             p[(k+4)%6]-=u-99
+    TM[str(len(T1))] = abs(p[0])+abs(p[1])+abs(p[2])+abs(p[3])+abs(p[4])+abs(p[5])
     T1.append(p)
 
 
-for j in T1:
-    TM[str(T1.index(j))] = abs((sum(j)/len(j)))
+    
 
 TD = list(TM.items())
 TD.sort(key=lambda j: j[1])
