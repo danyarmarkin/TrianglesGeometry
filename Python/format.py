@@ -1,3 +1,4 @@
+from math import *
 def getPos(s):
     x = 0
     y = 0
@@ -23,6 +24,9 @@ n = int(input())
 i = 0
 T = []
 TN = []
+AB = 0
+BC = 0
+AC = 0
 for line in f:
     s = str(line).replace("\n", "")
     a = i % 7
@@ -52,22 +56,26 @@ for line in f:
         l = getLen(s)
         T[ind].append(l)
         TN[ind] *= l<200
+        AB = l
     #BC
     if a == 4:
         l = getLen(s)
         T[ind].append(l)
         TN[ind] *= l<200
-    #CD
+        BC = l
+    #AC
     if a == 5:
         l = getLen(s)
         T[ind].append(l)
         TN[ind] *= l<200
+        AC = l
     i+=1
     
 T1 = []
 TM = dict()
 for j in range(len(T)):
     p = T[j]
+    p1 = T[j]
     b = TN[j]
     if b == False:
         continue
@@ -78,14 +86,19 @@ for j in range(len(T)):
             p[k]-=Zx
         else:
             p[k]-=Zy
-    for k in range(len(p)):
+    for k in range(6):
         u = p[k]
         if u >= 100 or u <= -100:
             p[k]-=u-99
             p[(k+2)%6]-=u-99
             p[(k+4)%6]-=u-99
-    TM[str(len(T1))] = abs(p[0])+abs(p[1])+abs(p[2])+abs(p[3])+abs(p[4])+abs(p[5])
-    T1.append(p)
+    ab = sqrt((p[0]-p[2])**2+(p[1]-p[3])**2)
+    bc = sqrt((p[2]-p[4])**2+(p[3]-p[5])**2)
+    ac = sqrt((p[0]-p[4])**2+(p[1]-p[5])**2)
+    if ab%1==0 and bc%1==0 and ac%1==0:     
+        TM[str(len(T1))] = abs(p[0])+abs(p[1])+abs(p[2])+abs(p[3])+abs(p[4])+abs(p[5])
+        T1.append(p)
+    
 
 
 TO = []
